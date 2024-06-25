@@ -14,6 +14,13 @@
 
 对上述文件进行简单清洗和整理后基于Chroma构建向量数据库，目前知识库数量较少，后续将搜集更多相关历史文献用于增强知识问答能力。
 
+# 效果展示
+
+目前该项目可在ModelScope魔搭社区进行[在线体验](https://modelscope.cn/studios/sleep10h1d/History-Chat-Bot)，以下是一个简单的展示示例。
+
+
+![example](docs/example.png "问答机器人效果展示")
+
 
 # 其他说明
 

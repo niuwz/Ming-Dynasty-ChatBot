@@ -1,1 +1,5 @@
-./apikey.txt
+apikey.txt
+*.ipynb
+contents/raw
+bge_embedding/*.bin
+chatbot.py

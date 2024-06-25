@@ -9,14 +9,9 @@ from duckduckgo_search.utils import SESSION
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.prompts import PromptTemplate
-# from langchain.vectorstores import FAISS
-from langchain.memory import ChatMessageHistory
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain.vectorstores import Chroma
 from langchain_community.chat_models import ChatZhipuAI
-# with open("apikey.txt", 'r') as f:
-#     apikey = f.readline()
-# os.environ["ZHIPUAI_API_KEY"] = apikey
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 HF_ENDPOINT = os.environ.get("HF_ENDPOINT", "https://hf-mirror.com")
 
@@ -26,23 +21,6 @@ nltk.data.path.append('../nltk_data')
 DEVICE = "cuda" if torch.cuda.is_available(
 ) else "mps" if torch.backends.mps.is_available() else "cpu"
 
-
-# ["GLM-3-turbo", "GLM-4-0520", 'GLM-4']
-
-# llm_dict = {
-#     "GLM-3-turbo": {
-#         'model_name': 'ZhipuAI/ChatGLM-6B',
-#         'model_revision': 'v1.0.15',
-#     },
-#     "GLM-4-0520": {
-#         'model_name': 'thomas/ChatGLM-6B-Int8',
-#         'model_revision': 'v1.0.3',
-#     },
-#     'ChatGLM-6B-int4': {
-#         'model_name': 'ZhipuAI/ChatGLM-6B-Int4',
-#         'model_revision': 'v1.0.3',
-#     }
-# }
 
 
 def search_web(query):
@@ -269,30 +247,11 @@ if __name__ == "__main__":
                                    ],
                                    outputs=[message, chatbot, state])
 
-                    # send.click(predict,
-                    #            inputs=[
-                    #                message, large_language_model, used,
-                    #                file, VECTOR_SEARCH_TOP_K,
-                    #                HISTORY_LEN, temperature, top_p, use_web, key,
-                    #                state
-                    #            ],
-                    #            outputs=[message, chatbot, state])
-                    # clear_history.click(fn=clear_session,
-                    #                     inputs=[],
-                    #                     outputs=[chatbot, state],
-                    #                     queue=False)
-
-                    # message.submit(predict,
-                    #                inputs=[
-                    #                    message, large_language_model, used,
-                    #                    file, VECTOR_SEARCH_TOP_K, HISTORY_LEN,
-                    #                    temperature, top_p, use_web, key, state
-                    #                ],
-                    #                outputs=[message, chatbot, state])
         gr.Markdown("""<center><font size=2>
-        本项目基于LangChain和大型语言模型系列模型, 提供基于本地知识的自动问答应用. <br>
-        目前项目提供基于<a href='https://github.com/THUDM/ChatGLM-6B' target="_blank">ChatGLM-6B </a>的LLM和包括nlp_corom_sentence-embedding系列的多个Embedding模型, 支持上传 txt、docx、md 等文本格式文件. <br>
-        后续将提供更加多样化的LLM、Embedding和参数选项供用户尝试, 欢迎关注<a href='https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui' target="_blank">Github地址</a>.
+        本项目基于LangChain和GLM系列模型, 提供基于本地知识的自动问答应用. <br>
+        主要参考了项目<a href='https://github.com/thomas-yanxin/LangChain-ChatGLM-Webui' target="_blank">LangChain-ChatGLM-Webui</a>
+        目前项目知识数据库来源较为单一, 可通过上传自定义文件等作为补充. <br>
+        后续将提供更多的模型以及更加多样化的数据来源, 欢迎关注<a href='https://github.com/niuwz/Ming-Dynasty-ChatBot' target="_blank">Github地址</a>.
         </center></font>
         """)
     demo.queue().launch(share=False)
